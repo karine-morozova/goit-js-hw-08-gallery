@@ -1,4 +1,4 @@
-export default [
+const images = [
     {
       preview:
         'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg',
@@ -64,16 +64,36 @@ export default [
     },
   ];
 
-//   <li class="gallery__item">
-//   <a
-//     class="gallery__link"
-//     href="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
-//   >
-//     <img
-//       class="gallery__image"
-//       src="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546__340.jpg"
-//       data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
-//       alt="Tulips"
-//     />
-//   </a>
-// </li>
+  const galleryEl = document.querySelector(".js-gallery");
+  console.log(galleryEl);
+
+  const galleryListEl = createGalleryList(images);
+  console.log(galleryListEl);
+
+   galleryEl.insertAdjacentHTML("beforeend",galleryListEl);
+
+  function createGalleryList ({original, description, preview}) {
+    return  images.map(image => {`<li class="gallery__item">
+    <a
+      class="gallery__link"
+      href="${original}"
+    >
+      <img
+        class="gallery__image"
+        src="${preview}"
+        data-source="${original}"
+        alt="${description}"
+      />
+    </a>
+  </li>`}).join("");
+  }
+
+ function openModal (event) {
+   if(event.target.nodeName !== "IMG") { 
+     return
+    };
+
+
+ }
+
+ 
