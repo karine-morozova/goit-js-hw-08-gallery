@@ -2,9 +2,7 @@ import galleryItems from "./gallery-items.js"
 
   const galleryEl = document.querySelector(".js-gallery");
   const modalEl = document.querySelector(".js-lightbox");
-  // const galleryItemEl = document.querySelector(".gallery__item");
 const overlayEl = document.querySelector(".lightbox__overlay");
-// const modalContentEl = document.querySelector(".lightbox__content");
 const modalImgEl = document.querySelector(".lightbox__image");
 const closeBtnEl = document.querySelector(".lightbox__button");
 
@@ -16,8 +14,9 @@ const closeBtnEl = document.querySelector(".lightbox__button");
    galleryEl.addEventListener("click", onOpenModal);
    closeBtnEl.addEventListener("click", onCloseModal);
    overlayEl.addEventListener("click", onCloseModalOnOverlay);
-  window.addEventListener("keypress", onCloseModalByEsc);
-  function createGalleryList(img) {
+   
+
+  function createGalleryList() {
     return  img.map(({original, description, preview}) => {
       return `<li class="gallery__item">
     <a
@@ -39,7 +38,8 @@ const closeBtnEl = document.querySelector(".lightbox__button");
    if(event.target.nodeName !== "IMG") { 
      return
     };
-    
+     document.addEventListener("keydown", onCloseModalByEsc);
+
     modalEl.classList.add("is-open");
     modalImgEl.src = event.currentTarget.src;
     modalImgEl.alt = event.currentTarget.alt;
@@ -47,8 +47,9 @@ const closeBtnEl = document.querySelector(".lightbox__button");
  }
 
  function onCloseModal (event) {
+  document.removeEventListener("keydown", onCloseModalByEsc);
   modalEl.classList.remove("is-open");
-  modalImgEl.src = "";
+   modalImgEl.src = "";
     
 
  }
