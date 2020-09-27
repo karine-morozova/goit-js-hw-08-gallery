@@ -13,10 +13,10 @@ const closeBtnEl = document.querySelector(".lightbox__button");
    galleryEl.insertAdjacentHTML("beforeend",galleryListEl);
 
   
-   galleryEl.addEventListener("click", openModal);
-   closeBtnEl.addEventListener("click", closeModal);
-   overlayEl.addEventListener("click", closeModalOnOverlay);
-
+   galleryEl.addEventListener("click", onOpenModal);
+   closeBtnEl.addEventListener("click", onCloseModal);
+   overlayEl.addEventListener("click", onCloseModalOnOverlay);
+  window.addEventListener("keypress", onCloseModalByEsc);
   function createGalleryList(img) {
     return  img.map(({original, description, preview}) => {
       return `<li class="gallery__item">
@@ -34,7 +34,7 @@ const closeBtnEl = document.querySelector(".lightbox__button");
   </li>`}).join("");
   }  
 
- function openModal (event) {
+ function onOpenModal (event) {
    event.preventDefault();
    if(event.target.nodeName !== "IMG") { 
      return
@@ -46,15 +46,21 @@ const closeBtnEl = document.querySelector(".lightbox__button");
 
  }
 
- function closeModal (event) {
+ function onCloseModal (event) {
   modalEl.classList.remove("is-open");
   modalImgEl.src = "";
     
 
  }
- function closeModalOnOverlay (event) {
+ function onCloseModalOnOverlay (event) {
    if (event.currentTarget === event.target) {
-    modalEl.classList.remove("is-open");
+    onCloseModal();
+   }
+ }
+
+ function onCloseModalByEsc (event) {
+   if (event.code === "Escape") {
+     onCloseModal();
    }
  }
 
