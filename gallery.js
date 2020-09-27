@@ -16,7 +16,7 @@ const closeBtnEl = document.querySelector(".lightbox__button");
    overlayEl.addEventListener("click", onCloseModalOnOverlay);
    
 
-  function createGalleryList() {
+  function createGalleryList(img) {
     return  img.map(({original, description, preview}) => {
       return `<li class="gallery__item">
     <a
