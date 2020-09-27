@@ -41,8 +41,8 @@ const closeBtnEl = document.querySelector(".lightbox__button");
      document.addEventListener("keydown", onCloseModalByEsc);
 
     modalEl.classList.add("is-open");
-    modalImgEl.src = event.currentTarget.src;
-    modalImgEl.alt = event.currentTarget.alt;
+    modalImgEl.src = event.target.dataset.source;
+    modalImgEl.alt = event.target.alt;
 
  }
 
